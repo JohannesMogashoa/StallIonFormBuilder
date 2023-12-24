@@ -1,5 +1,9 @@
 import "./globals.css";
 
+import DesignerContextProvider, {
+	DesignerContext,
+} from "@/components/context/DesignContext";
+
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
@@ -22,15 +26,17 @@ export default function RootLayout({
 		<ClerkProvider>
 			<html lang="en">
 				<body className={inter.className}>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="system"
-						enableSystem
-						disableTransitionOnChange
-					>
-						{children}
-						<Toaster />
-					</ThemeProvider>
+					<DesignerContextProvider>
+						<ThemeProvider
+							attribute="class"
+							defaultTheme="system"
+							enableSystem
+							disableTransitionOnChange
+						>
+							{children}
+							<Toaster />
+						</ThemeProvider>
+					</DesignerContextProvider>
 				</body>
 			</html>
 		</ClerkProvider>
